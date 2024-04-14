@@ -1,0 +1,116 @@
+body {
+    font-family: 'Roboto', sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #0C1618;
+}
+
+.title-sect {
+    text-align: center;
+    margin: 20px auto;
+    padding: 10px 50px;
+    width: fit-content;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #004643;
+    border-radius: 20px;
+    color: #FAF4D3;
+}
+
+#script-list {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 20px;
+    margin: 20px auto;
+    padding: 10px;
+    width: 80%;
+    border-radius: 20px;
+}
+
+.script-item {
+    background-color: #D1AC00;
+    border-radius: 20px;
+    height: 100px;
+    width: 100px;
+    padding: 10px 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    color: #004643;
+    font-weight: bold;
+}
+.script-item:hover {
+    background-color: #FAF4D3;
+    color: #004643;
+    cursor: pointer;
+}
+
+
+/* Modal styles */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5);
+}
+
+.modal-container {
+    background-color: #004643;
+    margin: 20% auto;
+    padding: 20px;
+    border-radius: 10px;
+    width: 60%;
+    box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+}
+
+.modal-content {
+    padding: 20px;
+    background-color: #0C1618;
+    border-radius: 10px;
+    color: #FAF4D3;
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.close {
+    color: #aaa;
+    float:right;
+    font-size: 28px;
+    font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+    color: black;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+/* Coding Syntax Styling*/
+
+.keyword {
+    color: rgb(20, 76, 196);
+}
+.function {
+    color: rgb(190, 6, 190)
+}
+
+.number {
+    color: rgb(99, 99, 231)
+}
+
+.variable {
+    color: rgb(1, 156, 1);
+}
+
+.string {
+    color: #D1AC00;
+}
