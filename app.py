@@ -1,31 +1,19 @@
-from flask import Flask, jsonify
+from flask import Flask, jsonify, send_file
 from flask_cors import CORS
+import os
 
 app = Flask(__name__)
 CORS(app)
 
-"""
- Define your scripts (array of objects of structure: {
-    id: number,
-    script_name: string,
-    script_content: string (this will be python syntax with formatting like new lines, tabs, etc.)
-})
-"""
+script_dict = {
+    101: 'sort.py'
+}
+
 scripts = [
     {
-        "id": 1,
-        "script_name": "Hello World",
-        "script_content": "<span class='function'>print</span>(<span class='string'>'Hello World'</span>)"
-    },
-    {
-        "id": 2,
-        "script_name": "Addition",
-        "script_content": "<span class='variable'>a</span> = <span class='number'>5</span>\n<span class='variable'>b</span> = <span class='number'>10</span>\n<span class='function'>print</span>(<span class='variable'>a</span> + <span class='variable'>b</span>)"
-    },
-    {
-        "id": 3,
-        "script_name": "Subtraction",
-        "script_content": "<span class='variable'>a</span> = <span class='number'>5</span>\n<span class='variable'>b</span> = <span class='number'>10</span>\n<span class='function'>print</span>(<span class='variable'>a</span> - <span class='variable'>b</span>)"
+        "id": 101,
+        "script_name": "Sort Files",
+        "script_content": "<span class='function'>def</span> <span class='function_name'>sort_files</span>():\n\n    <span class='comment'># Get the current working directory</span>\n    <span class='variable'>current_directory</span> = <span class='function'>os.getcwd</span>()\n\n    <span class='comment'># Iterate through all files in the current directory</span>\n    <span class='variable'>files</span> = <span class='function'>os.listdir</span>(<span class='variable'>current_directory</span>)\n\n    <span class='keyword'>for</span> <span class='variable'>file</span> <span class='keyword'>in</span> <span class='variable'>files</span>:\n\n        <span class='comment'># Check if the file is a regular file (not a directory)</span>\n        <span class='keyword'>if</span> <span class='function'>os.path.isfile</span>(<span class='function'>os.path.join</span>(<span class='variable'>current_directory</span>, <span class='variable'>file</span>)):\n\n            <span class='comment'># Check if the file has an extension</span>\n            <span class='variable'>file_name</span>, <span class='variable'>file_extension</span> = <span class='function'>os.path.splitext</span>(<span class='variable'>file</span>)\n            \n            <span class='variable'>formatted_extension</span> =  <span class='variable'>file_extension</span>[1:].<span class='function'>upper</span>()\n\n            <span class='keyword'>if</span> <span class='variable'>formatted_extension</span> == <span class='string'>\"IMG\"</span> <span class='keyword'>or</span> \n                <span class='variable'>formatted_extension</span> == <span class='string'>\"JPG\"</span> <span class='keyword'>or</span> \n                <span class='variable'>formatted_extension</span> == <span class='string'>\"JPEG\"</span> <span class='keyword'>or</span> \n                <span class='variable'>formatted_extension</span> == <span class='string'>\"PNG\"</span> <span class='keyword'>or</span> \n                <span class='variable'>formatted_extension</span> == <span class='string'>\"GIF\"</span> <span class='keyword'>or</span> \n                <span class='variable'>formatted_extension</span> == <span class='string'>\"SVG\"</span>:\n            <span class='variable'>formatted_extension</span> = <span class='string'>\"IMAGES\"</span>\n            \n            <span class='variable'>dir_name</span> = <span class='string'>\"SORT \"</span> + <span class='variable'>formatted_extension</span> \n\n            <span class='comment'># Skip files without extension or Python files</span>\n            <span class='keyword'>if</span> <span class='variable'>file_extension</span> == <span class='string'>\"\"</span> <span class='keyword'>or</span> <span class='variable'>file_extension</span> == <span class='string'>\".py\"</span>: \n                <span class='keyword'>continue</span>\n            \n            <span class='comment'># Specify the directory to move files</span>\n            <span class='variable'>target_directory</span> = <span class='function'>os.path.join</span>(<span class='variable'>current_directory</span>+<span class='string'>\"/SORTED\"</span>, <span class='variable'>dir_name</span>)\n            <span class='function'>os.makedirs</span>(<span class='variable'>target_directory</span>, exist_ok=<span class='keyword'>True</span>)\n            \n            <span class='comment'># Construct the full path to the source file</span>\n            <span class='variable'>source_file</span> = <span class='function'>os.path.join</span>(<span class='variable'>current_directory</span>, <span class='variable'>file</span>)\n\n            <span class='comment'># Construct the destination path</span>\n            <span class='variable'>destination_file</span> = <span class='function'>os.path.join</span>(<span class='variable'>target_directory</span>, <span class='variable'>file</span>)\n\n            <span class='comment'># Handle existing files in the target directory</span>\n            <span class='keyword'>while</span> <span class='function'>os.path.exists</span>(<span class='variable'>destination_file</span>):\n\n                <span class='comment'># Append the current time in the format hhmm as an identifier</span>\n                <span class='variable'>current_time</span> = <span class='function'>time.strftime</span>(<span class='string'>\"%H%M\"</span>)\n                <span class='variable'>new_file_name</span> = <span class='string'>\"{file_name}_{current_time}{file_extension}\"</span>\n                \n                <span class='comment'># If the new file name already exists, add a numeric suffix</span>\n                <span class='variable'>count</span> = 1\n                <span class='keyword'>while</span> <span class='function'>os.path.exists</span>(<span class='function'>os.path.join</span>(<span class='variable'>target_directory</span>, <span class='variable'>new_file_name</span>)):\n                    <span class='variable'>new_file_name</span> = <span class='string'>\"{file_name}_{current_time}({count}){file_extension}\"</span>\n                    <span class='variable'>count</span> += 1\n                \n                <span class='variable'>destination_file</span> = <span class='function'>os.path.join</span>(<span class='variable'>target_directory</span>, <span class='variable'>new_file_name</span>)\n\n            <span class='comment'># Move the file to the specified directory</span>\n            <span class='function'>shutil.move</span>(<span class='variable'>source_file</span>, <span class='variable'>destination_file</span>)\n            <span class='variable'>response</span>[<span class='variable'>dir_name</span>] = <span class='variable'>response</span>.<span class='function'>get</span>(<span class='variable'>dir_name</span>, 0) + 1\n\n<span class='function'>def</span> <span class='function_name'>output_changes</span>():\n    <span class='keyword'>if</span>  <span class='keyword'>not</span> <span class='variable'>response</span>:\n        <span class='function'>print</span>(<span class='string'>\"No files were moved\"</span>)\n        <span class='keyword'>return</span>\n    <span class='keyword'>for</span> <span class='variable'>dir_name</span>, <span class='variable'>count</span> <span class='keyword'>in</span> <span class='variable'>response</span>.<span class='function'>items</span>():\n        <span class='function'>print</span>(f\"<span class='variable'>dir_name</span> moved <span class='variable'>count</span> file(s)\")\n\n<span class='function'>def</span> <span class='function_name'>main</span>():\n    <span class='function_name'>sort_files</span>()\n    <span class='function_name'>output_changes</span>()\n\n<span class='keyword'>if</span> <span class='variable'>__name__</span> == <span class='string'>\"__main__\"</span>:\n    <span class='function_name'>main</span>()"
     }
 ]
 
@@ -33,6 +21,19 @@ scripts = [
 @app.route('/objects', methods=['GET'])
 def get_objects():
     return jsonify(scripts)
+
+@app.route('/download_script/<int:script_id>', methods=['GET'])
+def download_script(script_id):
+    # Find the script by id
+    for script in scripts:
+        if script['id'] == script_id:
+            script_name = script_dict[script_id]
+            script_path = os.path.join(os.path.dirname(__file__), 'server', 'scripts', script_name)
+            if os.path.exists(script_path):
+                return send_file(script_path, as_attachment=True)
+            else:
+                return 'File not found!', 404
+    return 'Script not found!', 404
 
 if __name__ == '__main__':
     app.run(debug=True)
