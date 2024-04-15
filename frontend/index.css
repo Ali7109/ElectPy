@@ -55,6 +55,7 @@ body {
     display: none;
     position: fixed;
     z-index: 1000;
+    margin: auto;
     top: 0;
     left: 0;
     width: 100%;
@@ -63,12 +64,12 @@ body {
 }
 
 .modal-container {
-    background-color: #004643;
-    margin: 20% auto;
+    background-color: hsl(177, 100%, 14%);
+    margin: 50px auto;
     padding: 20px;
     border-radius: 10px;
-    width: 60%;
     box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2);
+    position: relative;
 }
 
 .modal-content {
@@ -77,19 +78,48 @@ body {
     border-radius: 10px;
     color: #FAF4D3;
     font-size: 18px;
-    font-weight: 800;
+    font-weight: 500;
+    height: 450px;
+    overflow-y: auto;
+}
+
+.download-button {
+    color: #aaa;
+    float:right;
+    font-size: 28px;
+    font-weight: bold;
+    padding: 10px;
+    border-radius: 10px;
+    position: absolute;
+    top: 30px;
+    right: 80px;
+}
+
+
+.download-button:hover,
+.download-button:focus {
+    color: #D1AC00;
+    background-color: #132326;
+    text-decoration: none;
+    cursor: pointer;
 }
 
 .close {
     color: #aaa;
     float:right;
-    font-size: 28px;
+    font-size: 32px;
     font-weight: bold;
+    padding: 10px;
+    border-radius: 10px;
+    position: absolute;
+    top: 30px;
+    right: 40px;
 }
 
 .close:hover,
 .close:focus {
-    color: black;
+    color: #D1AC00;
+    background-color: #132326;
     text-decoration: none;
     cursor: pointer;
 }
@@ -97,7 +127,7 @@ body {
 /* Coding Syntax Styling*/
 
 .keyword {
-    color: rgb(20, 76, 196);
+    color: rgb(40, 104, 243);
 }
 .function {
     color: rgb(190, 6, 190)
@@ -113,4 +143,27 @@ body {
 
 .string {
     color: #D1AC00;
+}
+
+
+/* This will apply to all scrollbars on the page */
+::-webkit-scrollbar {
+    width: 10px; /* Adjust scrollbar width */
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+    background: #004643; /* Match the background color */
+    border-radius: 20px; /* Match the border radius */
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+    background: #D1AC00; /* Match the script-item background color */
+    border-radius: 20px; /* Match the border radius */
+}
+
+/* Handle on hover */
+::-webkit-scrollbar-thumb:hover {
+    background: #FAF4D3; /* Match the color property */
 }
