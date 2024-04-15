@@ -1,31 +1,29 @@
 <!-- index.html -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Electron Proj</title>
-    <link rel="stylesheet" href="index.css">
-</head>
-<!--
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Electron Proj</title>
+		<link rel="stylesheet" href="index.css" />
+	</head>
 
-    This project will show python scripts. You can click items and open them in a new window.
--->
-<body>
-    <section class="title-sect">
-        <h1>ScriptSuite</h1>
-    </section>
-    <section class="script-sect">
-        <div id="script-list"></div>
-        <div id="modal" class="modal">
-            <div class="modal-container">
-                <div class="modal-content">
-                    <span class="close">&times;</span>
-                    <pre id="modal-script-content"></pre>
-                </div>
-            </div>
-        </div>
-    </section>
-    <script src="renderer.js"></script>
-</body>
+	<body>
+		<section class="title-sect">
+			<h1>Script Suite</h1>
+		</section>
+		<section class="script-sect">
+			<div id="script-list"></div>
+			<div id="modal" class="modal">
+				<div class="modal-container">
+					<div class="modal-content">
+						<span class="close" title="Close">&times;</span>
+                        <span class="download-button" title="Download">&#x21e9;</span>
+						<pre id="modal-script-content"></pre>
+					</div>
+				</div>
+			</div>
+		</section>
+		<script src="renderer.js"></script>
+	</body>
 </html>
